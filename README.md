@@ -13,17 +13,22 @@ This repository showcases an example of integrating **Integry** within a chat ap
 To get a local copy up and running, follow these steps:
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/IntegryHQ/copilot-example.git
    ```
+
 2. Create a `.env` file on the root of your project and copy content from `dev.env` file
 3. Fill in the variable values in `.env` file.
 4. Run the application using:
+
    ```bash
    npm install && npm run dev
    ```
+
 5. Visit the application on http://localhost:3000 in your browser.
 6. You can now ask the chatbot to perform actions similar to:
+
    ```bash
    connect my Slack account
    disconnect my Mailchimp account
