@@ -24,11 +24,13 @@ export function renderFunctionUI(integry: any, func: any, handler: any) {
           handler(response);
         })
         .catch((error: any) => {
-          console.error("Error:", error);
+          closePopup();
+          handler("There was an error invoking the function.");
         });
     })
     .catch((error: any) => {
-      console.error("Error:", error);
+      closePopup();
+      handler("There was an error invoking the function.");
     });
 }
 
