@@ -34,6 +34,8 @@ function useIntegryCopilotKitIntegration() {
   const [integry, setIntegry] = useState<IntegryJS | null>(null);
   const [hash, setHash] = useState("");
 
+  let isPredictingFunction = false;
+
   useEffect(() => {
     /**
      * Initializing the Integry SDK object inside useEffect
@@ -114,8 +116,13 @@ function useIntegryCopilotKitIntegration() {
 
             return <div>Connecting {appName}...</div>;
           default:
+            if (isPredictingFunction) {
+              return <div>Loading...</div>;
+            }
+            isPredictingFunction = true;
             predictFunction(appKey, hash, userId, true, true, args.query)
               .then((data) => {
+                isPredictingFunction = false;
                 if (data.functions.length === 0) {
                   handler("No appropriate function found.");
                   return;
