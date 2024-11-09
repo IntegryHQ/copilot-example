@@ -93,9 +93,11 @@ function useIntegryCopilotKitIntegration() {
             appName = args.query.split(".")[1];
             integry.isConnected(appName).then((authorization_id: string) => {
               if (authorization_id) {
-                integry.disconnect(authorization_id).then((response: any) => {
-                  handler(response);
-                });
+                integry
+                  .disconnect(appName, authorization_id)
+                  .then((response: any) => {
+                    handler(response);
+                  });
               } else {
                 handler("Already disconnected.");
               }
