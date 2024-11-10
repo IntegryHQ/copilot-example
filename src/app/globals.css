@@ -8,7 +8,7 @@
     --font-geist-mono: 'GeistMono', monospace; /* Use a generic fallback */
   }
   
-  [class*="functionFormWrap"] {
+  [class*="functionFormWrap"], [class*="appsHeaderTitle"], [class*="searchContainer"] input, [class*="appCardTitle"], [class*="appCardAuthStatus"] {
     font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
 }
 

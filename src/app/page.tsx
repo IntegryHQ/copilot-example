@@ -18,21 +18,44 @@ import { FindAndExecuteFunctionArgs } from "../types/types";
 import { renderFunctionUI, predictFunction, getIntent } from "../helpers";
 
 export default function Home() {
-  useIntegryCopilotKitIntegration();
+  const [integryRef, setIntegryRef] = useState<IntegryJS | null>(null); // State to store Integry object
+
+  useIntegryCopilotKitIntegration(setIntegryRef);
+
+  const handleOpenMarketplace = () => {
+    if (integryRef) {
+      integryRef.renderMarketplace();
+    }
+  };
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      Integry Marketplace
+    <div>
+      <div className="flex items-center justify-center min-h-screen flex-col">
+        <div className="mt-4">
+          {" "}
+          {/* Adding margin-top to space the button from the text */}
+          <button
+            onClick={() => {
+              handleOpenMarketplace();
+            }}
+            className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+          >
+            Open Integry Marketplace
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
 
-function useIntegryCopilotKitIntegration() {
+function useIntegryCopilotKitIntegration(
+  setIntegryRef: React.Dispatch<React.SetStateAction<IntegryJS | null>>
+) {
   const generalContext = useCopilotContext();
   const messagesContext = useCopilotMessagesContext();
   const context = { ...generalContext, ...messagesContext };
 
-  const [integry, setIntegry] = useState<IntegryJS | null>(null);
   const [hash, setHash] = useState("");
+  const [integry, setIntegry] = useState<IntegryJS | null>(null); // State to store Integry object
 
   let isPredictingFunction = false;
 
@@ -52,6 +75,7 @@ function useIntegryCopilotKitIntegration() {
         });
         setHash(hash);
         setIntegry(integry);
+        setIntegryRef(integry);
       })
       .catch((error: any) => {
         console.error("Error fetching auth hash:", error);
