@@ -148,6 +148,7 @@ function useIntegryCopilotKitIntegration(
             });
 
             return <div>Connecting {appName}...</div>;
+
           default:
             if (isPredictingFunction) {
               return <div>Loading...</div>;
@@ -168,12 +169,22 @@ function useIntegryCopilotKitIntegration(
                      * otherwise returns false
                      */
                     if (authorization_id) {
-                      renderFunctionUI(integry, data.functions[0], handler);
+                      renderFunctionUI(
+                        integry,
+                        data.functions[0],
+                        handler,
+                        args.query
+                      );
                     } else {
                       integry
                         .connect(data.functions[0].meta.app.name)
                         .then((response: any) => {
-                          renderFunctionUI(integry, data.functions[0], handler);
+                          renderFunctionUI(
+                            integry,
+                            data.functions[0],
+                            handler,
+                            args.query
+                          );
                         });
                     }
                   });
