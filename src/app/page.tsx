@@ -29,7 +29,7 @@ export default function Home() {
   };
   return (
     <div>
-      <div className="flex items-center justify-center min-h-screen flex-col">
+      <div className="flex menuBar justify-right flex-col">
         <div className="mt-4">
           {" "}
           {/* Adding margin-top to space the button from the text */}
@@ -41,6 +41,13 @@ export default function Home() {
           >
             Open Integry Marketplace
           </button>
+        </div>
+      </div>
+      <div className="flex items-center justify-center min-h-custom flex-col">
+        <div className="mt-4">
+          {" "}
+          {/* Adding margin-top to space the button from the text */}
+          <p>Integry Marketplace Demo</p>
         </div>
       </div>
     </div>

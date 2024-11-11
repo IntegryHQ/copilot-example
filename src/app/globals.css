@@ -8,6 +8,16 @@
     --font-geist-mono: 'GeistMono', monospace; /* Use a generic fallback */
   }
   
-  [class*="functionFormWrap"], [class*="appsHeaderTitle"], [class*="searchContainer"] input, [class*="appCardTitle"], [class*="appCardAuthStatus"], [class*="embedPreviewFooterDesc"], [class*="embedPreviewFooterCTA"] {
+  [class*="functionFormWrap"], [class*="appsHeaderTitle"], [class*="searchContainer"] input, [class*="searchContainer"] input::placeholder, [class*="appCardTitle"], [class*="appCardAuthStatus"], [class*="embedPreviewFooterDesc"], [class*="embedPreviewFooterCTA"] {
     font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+}
+
+.min-h-custom {
+    min-height: 70vh;
+}
+.justify-right {
+  text-align: right;
+}
+.menuBar {
+  margin-right: 20px;
 }
