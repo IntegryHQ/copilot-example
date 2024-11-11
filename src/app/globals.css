@@ -8,10 +8,6 @@
     --font-geist-mono: 'GeistMono', monospace; /* Use a generic fallback */
   }
   
-  [class*="functionFormWrap"], [class*="appsHeaderTitle"], [class*="searchContainer"] input, [class*="appCardTitle"], [class*="appCardAuthStatus"] {
+  [class*="functionFormWrap"], [class*="appsHeaderTitle"], [class*="searchContainer"] input, [class*="appCardTitle"], [class*="appCardAuthStatus"], [class*="embedPreviewFooterDesc"], [class*="embedPreviewFooterCTA"] {
     font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
-}
-
-.nextjs-toast {
-  display: none;
 }
