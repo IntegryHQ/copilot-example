@@ -29,7 +29,7 @@ export default function Home() {
   };
   return (
     <div>
-      <div className="flex menuBar justify-right flex-col">
+      <div className="flex menuBar justify-right flex-col sticky top-0 z-10">
         <div className="mt-4">
           {" "}
           {/* Adding margin-top to space the button from the text */}
@@ -39,7 +39,7 @@ export default function Home() {
             }}
             className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
           >
-            Open Integry Marketplace
+            App Marketplace
           </button>
         </div>
       </div>
@@ -47,7 +47,7 @@ export default function Home() {
         <div className="mt-4">
           {" "}
           {/* Adding margin-top to space the button from the text */}
-          <p>Integry Marketplace Demo</p>
+          <p>Integry AI Integration Demo</p>
         </div>
       </div>
     </div>

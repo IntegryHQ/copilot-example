@@ -17,8 +17,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Integry Marketplace",
-  description: "Integry Marketplace",
+  title: "Integry AI Integration Demo",
+  description: "Integry AI Integration Demo",
 };
 
 export default function RootLayout({
@@ -39,7 +39,8 @@ export default function RootLayout({
             }
             labels={{
               title: "Popup Assistant",
-              initial: "Need any help?",
+              initial:
+                "How can I help? You can ask me to connect to any app, or take action on it. For example, you can ask me to create a new contact in your CRM like Salesforce or HubSpot.",
             }}
             defaultOpen={true}
           />
