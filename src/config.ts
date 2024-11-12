@@ -1,6 +1,6 @@
 const appKey = process.env.NEXT_PUBLIC_APP_KEY || "";
 const appSecret = process.env.NEXT_PUBLIC_APP_SECRET || "";
-const userId = "yasir@integry.io"; // Set your user ID directly or through environment variables
+const userId = process.env.NEXT_PUBLIC_USER_ID; // Set your user ID directly or through environment variables
 const findAndExecuteFunctionPrompt = `
 Find and execute a function. If the function is not available, search the catalog and execute the best match. NEVER ask the user for missing arguments—use a custom UI where they can fill in missing fields themselves. Inform the user if no match is found.
 
