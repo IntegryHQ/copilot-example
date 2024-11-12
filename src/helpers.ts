@@ -26,9 +26,8 @@ export function renderFunctionUI(
   handler: any,
   query?: string
 ) {
-  const queryParts = (query || "").split(".");
   let renderUI = true;
-  if (queryParts.length > 1 && queryParts[0] === "get") {
+  if (func.meta.type === "QUERY") {
     const requiredFields = extractRequiredFieldsWithNoDefaultValues(func);
     if (Object.keys(requiredFields).length === 0) {
       renderUI = false;
@@ -54,7 +53,13 @@ export function renderFunctionUI(
           .invokeFunction(result)
           .then((response: any) => {
             closePopup();
-            handler(response);
+            if (response.output === "") {
+              if (["200", "201", "202"].includes(response.network_code)) {
+                handler("The function was invoked successfully.");
+              }
+            } else {
+              handler(response);
+            }
           })
           .catch((error: any) => {
             closePopup();
