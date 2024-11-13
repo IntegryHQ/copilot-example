@@ -33,4 +33,7 @@ export interface Parameters {
 
 export interface Data {
   parameters: Parameters;
+  arguments: {
+    [key: string]: string;
+  };
 }

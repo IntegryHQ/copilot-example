@@ -31,7 +31,7 @@ export function renderFunctionUI(
     const requiredFields = extractRequiredFieldsWithNoDefaultValues(func);
     if (Object.keys(requiredFields).length === 0) {
       renderUI = false;
-      const requestObject = createRequestObject(func);
+      const requestObject = createRequestObject(func, func.arguments);
       integry
         .invokeFunction(requestObject)
         .then((response: any) => {
@@ -142,9 +142,18 @@ export function extractRequiredFieldsWithNoDefaultValues(data: Data) {
       const isRequired = requiredFields.includes(fieldKey);
       const hasNoDefaultValue = !fieldValue?.meta?.ui?.default_value; // No default value
       const isNotHidden = fieldValue?.meta?.ui?.field?.type !== "HIDDEN"; // Ensure the field is visible
+      const hasNoPredictedValue =
+        !data.arguments ||
+        !(fieldKey in data.arguments) ||
+        !data.arguments[fieldKey]; // Check if the field has a predicted value
 
       // If the field is required, visible, and has no default value, add it to the result
-      if (isRequired && hasNoDefaultValue && isNotHidden) {
+      if (
+        isRequired &&
+        hasNoDefaultValue &&
+        isNotHidden &&
+        hasNoPredictedValue
+      ) {
         result[fieldKey] = fieldValue;
       }
     }
@@ -154,7 +163,12 @@ export function extractRequiredFieldsWithNoDefaultValues(data: Data) {
   return result;
 }
 
-export function createRequestObject(func: any) {
+export function createRequestObject(
+  func: any,
+  argsData: {
+    [key: string]: string;
+  } = {}
+) {
   // Initialize the request object
   const requestObject: any = {
     method: "POST",
@@ -162,7 +176,7 @@ export function createRequestObject(func: any) {
     headers: {
       "Content-Type": "application/json",
     },
-    args: {},
+    args: argsData,
   };
 
   // Extract the properties from the parameters
@@ -176,7 +190,10 @@ export function createRequestObject(func: any) {
     }
 
     // Get the default value if present
-    const defaultValue = field?.meta?.ui?.default_value;
+    const defaultValue =
+      field?.meta?.ui?.default_value ||
+      (func.arguments && func.arguments[key]) ||
+      "";
 
     // Only add fields with default values
     if (defaultValue !== undefined) {
