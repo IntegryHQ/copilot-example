@@ -122,12 +122,15 @@ function useIntegryCopilotKitIntegration(
         switch (intent) {
           case "disconnect":
             appName = args.query.split(".")[1];
-            integry.isConnected(appName).then((authorization_id: string) => {
-              if (authorization_id) {
+            integry.isAppConnected(appName).then((isConnected: boolean) => {
+              if (isConnected) {
                 integry
-                  .disconnect(appName, authorization_id)
+                  .disconnectApp(appName)
                   .then((response: any) => {
                     handler(response);
+                  })
+                  .catch((error: any) => {
+                    handler("Failed to disconnect." + error.message);
                   });
               } else {
                 handler("Already disconnected.");
@@ -137,11 +140,11 @@ function useIntegryCopilotKitIntegration(
             return <div>Disconnecting {appName}...</div>;
           case "connect":
             appName = args.query.split(".")[1];
-            integry.isConnected(appName).then((authorization_id: string) => {
-              if (authorization_id) {
+            integry.isAppConnected(appName).then((isConnected: boolean) => {
+              if (isConnected) {
                 handler("Already connected.");
               } else {
-                integry.connect(appName).then((response: any) => {
+                integry.connectApp(appName).then((response: any) => {
                   handler("Connected successfully.");
                 });
               }
@@ -162,13 +165,13 @@ function useIntegryCopilotKitIntegration(
                   return;
                 }
                 integry
-                  .isConnected(data.functions[0].meta.app.name)
-                  .then((authorization_id: string) => {
+                  .isAppConnected(data.functions[0].meta.app.name)
+                  .then((isConnected: boolean) => {
                     /**
                      * returns the authorization_id if the app is connected
                      * otherwise returns false
                      */
-                    if (authorization_id) {
+                    if (isConnected) {
                       renderFunctionUI(
                         integry,
                         data.functions[0],
@@ -177,7 +180,7 @@ function useIntegryCopilotKitIntegration(
                       );
                     } else {
                       integry
-                        .connect(data.functions[0].meta.app.name)
+                        .connectApp(data.functions[0].meta.app.name)
                         .then((response: any) => {
                           renderFunctionUI(
                             integry,
