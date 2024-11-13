@@ -24,7 +24,7 @@ export default function Home() {
 
   const handleOpenMarketplace = () => {
     if (integryRef) {
-      integryRef.renderMarketplace();
+      integryRef.showApps();
     }
   };
   return (

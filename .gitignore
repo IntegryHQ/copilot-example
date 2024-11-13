@@ -13,3 +13,6 @@ build/
 
 # Ignore the entire .next directory (build artifacts, cache files, etc.)
 .next/
+
+# Ignore package-lock.json
+package-lock.json
