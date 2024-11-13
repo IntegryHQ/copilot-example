@@ -165,7 +165,7 @@ function useIntegryCopilotKitIntegration(
             appName = args.query.split(".")[2];
             integry
               .getConnectedAccounts(appName)
-              .then((connectedAccounts: string[]) => {
+              .then((connectedAccounts: any) => {
                 if (connectedAccounts.length > 0) {
                   handler(connectedAccounts);
                 } else {

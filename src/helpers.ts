@@ -47,10 +47,10 @@ export function renderFunctionUI(
 
   if (renderUI) {
     integry
-      .renderFunctionUI(func.name, func.arguments)
+      .showFunctionUI(func.name, func.arguments)
       .then((result: any) => {
         integry
-          .invokeFunction(result)
+          .invokeFunction(func.name, result)
           .then((response: any) => {
             closePopup();
             if (response.output === "") {
