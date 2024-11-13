@@ -15,7 +15,12 @@ import {
   findAndExecuteFunctionPrompt,
 } from "../config";
 import { FindAndExecuteFunctionArgs } from "../types/types";
-import { renderFunctionUI, predictFunction, getIntent } from "../helpers";
+import {
+  renderFunctionUI,
+  predictFunction,
+  getIntent,
+  findInQueryString,
+} from "../helpers";
 
 export default function Home() {
   const [integryRef, setIntegryRef] = useState<IntegryJS | null>(null); // State to store Integry object
@@ -122,10 +127,14 @@ function useIntegryCopilotKitIntegration(
         switch (intent) {
           case "disconnect":
             appName = args.query.split(".")[1];
+            const connectedAccountId = findInQueryString(
+              args.query,
+              "account_id"
+            );
             integry.isAppConnected(appName).then((isConnected: boolean) => {
               if (isConnected) {
                 integry
-                  .disconnectApp(appName)
+                  .disconnectApp(appName, connectedAccountId)
                   .then((response: any) => {
                     handler(response);
                   })
@@ -151,6 +160,20 @@ function useIntegryCopilotKitIntegration(
             });
 
             return <div>Connecting {appName}...</div>;
+
+          case "get_connected_accounts":
+            appName = args.query.split(".")[2];
+            integry
+              .getConnectedAccounts(appName)
+              .then((connectedAccounts: string[]) => {
+                if (connectedAccounts.length > 0) {
+                  handler(connectedAccounts);
+                } else {
+                  handler(`No connected accounts found for: ${appName}`);
+                }
+              });
+
+            return <div>Obtaining connected accounts... {appName}...</div>;
 
           default:
             if (isPredictingFunction) {

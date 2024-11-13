@@ -124,6 +124,13 @@ export function getIntent(query: string) {
     query.split(".").length === 2
   ) {
     return "connect";
+  } else if (
+    query.includes("connect") &&
+    query.split(".")[1] &&
+    query.split(".")[1] === "connected_accounts" &&
+    query.split(".").length === 3
+  ) {
+    return "get_connected_accounts";
   } else {
     return "default";
   }
@@ -203,4 +210,10 @@ export function createRequestObject(
   });
 
   return requestObject;
+}
+
+export function findInQueryString(queryStr: string, find: string) {
+  const urlParams = new URLSearchParams(queryStr.split("?")[1]); // Split at '?' to get the query part
+  const result = urlParams.get(find);
+  return result;
 }
