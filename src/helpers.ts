@@ -33,7 +33,7 @@ export function renderFunctionUI(
       renderUI = false;
       const requestObject = createRequestObject(func, func.arguments);
       integry
-        .invokeFunction(requestObject)
+        .invokeFunction(func.name, func.arguments)
         .then((response: any) => {
           closePopup();
           handler(response);
