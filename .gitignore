@@ -16,3 +16,6 @@ build/
 
 # Ignore package-lock.json
 package-lock.json
+Dockerfile
+package-lock.json
+types/dotenv.d.ts

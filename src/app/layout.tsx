@@ -42,7 +42,6 @@ export default function RootLayout({
               initial:
                 "How can I help? You can ask me to connect to any app, or take action on it. For example, you can ask me to create a new contact in your CRM like Salesforce or HubSpot.",
             }}
-            defaultOpen={true}
           />
         </CopilotKit>
       </body>
